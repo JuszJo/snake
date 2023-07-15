@@ -1,4 +1,5 @@
 import Game from "../Game.js";
+import Apple from "../classes/Apple.js";
 import MovementSystem from "./MovementSystem.js"
 
 export default class CollisionSystem {
@@ -20,15 +21,25 @@ export default class CollisionSystem {
 
     checkIntersection(object1, object2) {
         if(
-            object1.x + object1.width > object2.x &&
-            object1.x < object2.x + object2.width &&
-            object1.y + object2.height > object2.y &&
-            object1.y < object2.y + object2.height &&
+            object1.components.position.x + object1.components.size.width > object2.components.position.x &&
+            object1.components.position.x < object2.components.position.x + object2.components.size.width &&
+            object1.components.position.y + object1.components.size.height > object2.components.position.y &&
+            object1.components.position.y < object2.components.position.y + object2.components.size.height &&
             object1.name != object2.name
         )
         {
             return true;
         }
+    }
+
+    checkAppleCollision(entities) {
+        const currentEntity = entities.slice(0, 1)
+
+        if(this.checkIntersection(currentEntity[0], entities[1])) {
+            console.log("eaten apple");
+            
+            new Apple().reset()
+        }   
     }
 
     checkWallCollision(entities) {

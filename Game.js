@@ -52,7 +52,9 @@ export default class Game {
 
         this.systemManager.systems.movementSystem.move(movementEntities)
 
-        const collisionEntities = this.entityManager.getEntitiesWithComponents("position", "size", "movement", "collision")
+        const collisionEntities = this.entityManager.getEntitiesWithComponents("position", "size", "collision")
+
+        this.systemManager.systems.collisionSystem.checkAppleCollision(collisionEntities)
 
         this.systemManager.systems.collisionSystem.checkWallCollision(collisionEntities)
     }

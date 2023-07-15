@@ -8,7 +8,7 @@ let instance = null
 
 export default class Game {
     constructor() {
-        if(instance) return this
+        if(instance) return instance
 
         this.game = Game.getProps()
         
@@ -20,6 +20,8 @@ export default class Game {
 
         this.snake = new Snake().snake
         this.apple = new Apple().apple
+
+        this.lose = false
 
         instance = this
     }
@@ -69,13 +71,17 @@ export default class Game {
 
     restart() {
         this.snake = new Snake().snake
+
+        this.lose = false
     }
 
     end() {
         console.log("lose");
+        
+        this.lose = true
 
         setTimeout(() => {
             this.restart()
-        }, 3000)
+        }, 2000)
     }
 }

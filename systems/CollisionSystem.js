@@ -1,5 +1,6 @@
 import Game from "../Game.js";
 import Apple from "../classes/Apple.js";
+import Snake from "../classes/Snake.js";
 import MovementSystem from "./MovementSystem.js"
 
 export default class CollisionSystem {
@@ -39,6 +40,7 @@ export default class CollisionSystem {
             console.log("eaten apple");
             
             new Apple().reset()
+            new Snake().increaseSize()
         }   
     }
 

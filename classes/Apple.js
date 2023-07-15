@@ -5,7 +5,7 @@ let instance = null
 
 export default class Apple {
     constructor() {
-        if(instance) return this
+        if(instance) return instance
 
         this.apple = new EntityManager().createEntity("apple")
 

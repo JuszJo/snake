@@ -3,8 +3,12 @@ import SystemManager from "./Managers/SystemManager.js";
 import Snake from "./classes/Snake.js";
 import InputSystem from "./systems/InputSystem.js";
 
+let instance = null
+
 export default class Game {
     constructor() {
+        if(instance) return this
+
         this.game = Game.getProps()
         
         this.entityManager = new EntityManager()
@@ -14,6 +18,8 @@ export default class Game {
         this.inputSystem.listen()
 
         this.snake = new Snake().snake
+
+        instance = this
     }
 
     static getProps() {
@@ -57,8 +63,15 @@ export default class Game {
         requestAnimationFrame(this.start.bind(this))
     }
 
+    restart() {
+        this.snake = new Snake().snake
+    }
+
     end() {
         console.log("lose");
-        this.running = fale
+
+        setTimeout(() => {
+            this.restart()
+        }, 3000)
     }
 }

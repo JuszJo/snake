@@ -32,7 +32,7 @@ export default class CollisionSystem {
     }
 
     checkWallCollision(entities) {
-        const game = Game.getProps()
+        const gameProps = Game.getProps()
 
         for(let i = 0; i < entities.length; ++i) {
             const currentEntity = entities[i]
@@ -40,26 +40,34 @@ export default class CollisionSystem {
             if(currentEntity.components.position.x < 0) {
                 MovementSystem.setPositionX(currentEntity, 0)
 
-                // end game
                 currentEntity.removeComponent("movement")
-            }
-            if(currentEntity.components.position.x + currentEntity.components.size.width > game.canvas.width) {
-                MovementSystem.setPositionX(currentEntity, game.canvas.width - currentEntity.components.size.width)
 
-                // end game
+                const game = new Game()
+                game.end()
+            }
+            if(currentEntity.components.position.x + currentEntity.components.size.width > gameProps.canvas.width) {
+                MovementSystem.setPositionX(currentEntity, gameProps.canvas.width - currentEntity.components.size.width)
+
                 currentEntity.removeComponent("movement")
+
+                const game = new Game()
+                game.end()
             }
             if(currentEntity.components.position.y < 0) {
                 MovementSystem.setPositionY(currentEntity, 0)
 
-                // end game
                 currentEntity.removeComponent("movement")
-            }
-            if(currentEntity.components.position.y + currentEntity.components.size.height > game.canvas.height) {
-                MovementSystem.setPositionY(currentEntity, game.canvas.height - currentEntity.components.size.height)
 
-                // end game
+                const game = new Game()
+                game.end()
+            }
+            if(currentEntity.components.position.y + currentEntity.components.size.height > gameProps.canvas.height) {
+                MovementSystem.setPositionY(currentEntity, gameProps.canvas.height - currentEntity.components.size.height)
+
                 currentEntity.removeComponent("movement")
+
+                const game = new Game()
+                game.end()
             }
         }
     }

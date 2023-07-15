@@ -9,17 +9,17 @@ export default class CollisionSystem {
         this.collidables = []
     }
 
-    checkCollidables() {
-        this.collidables.splice(0)
+    // checkCollidables() {
+    //     this.collidables.splice(0)
 
-        for(const id in this.entities) {
-            const currentEntity = this.entities[id]
+    //     for(const id in this.entities) {
+    //         const currentEntity = this.entities[id]
 
-            if(currentEntity.components.collision) {
-                this.collidables.push(currentEntity)
-            }
-        }
-    }
+    //         if(currentEntity.components.collision) {
+    //             this.collidables.push(currentEntity)
+    //         }
+    //     }
+    // }
 
     checkIntersection(object1, object2) {
         if(
@@ -35,41 +35,41 @@ export default class CollisionSystem {
         }
     }
 
-    checkCollision() {
-        this.checkCollidables()
+    // checkCollision() {
+    //     this.checkCollidables()
 
-        const length = this.collidables.length
+    //     const length = this.collidables.length
 
-        for(let i = 0; i < length - 1; ++i) {
-            this.currentCollidable = this.collidables.splice(0, 1)[0]
+    //     for(let i = 0; i < length - 1; ++i) {
+    //         this.currentCollidable = this.collidables.splice(0, 1)[0]
 
-            const currentCollidableObject = {
-                x: this.currentCollidable.components.position.x,
-                y: this.currentCollidable.components.position.y,
-                width: this.currentCollidable.components.dimension.width,
-                height: this.currentCollidable.components.dimension.height,
-                name: this.currentCollidable.name,
-            }
+    //         const currentCollidableObject = {
+    //             x: this.currentCollidable.components.position.x,
+    //             y: this.currentCollidable.components.position.y,
+    //             width: this.currentCollidable.components.dimension.width,
+    //             height: this.currentCollidable.components.dimension.height,
+    //             name: this.currentCollidable.name,
+    //         }
 
-            this.collidables.forEach(collidable => {
-                const collidableObject = {
-                    x: collidable.components.position.x,
-                    y: collidable.components.position.y,
-                    width: collidable.components.dimension.width,
-                    height: collidable.components.dimension.height,
-                    name: collidable.name
-                }
+    //         this.collidables.forEach(collidable => {
+    //             const collidableObject = {
+    //                 x: collidable.components.position.x,
+    //                 y: collidable.components.position.y,
+    //                 width: collidable.components.dimension.width,
+    //                 height: collidable.components.dimension.height,
+    //                 name: collidable.name
+    //             }
 
-                if(this.checkIntersection(currentCollidableObject, collidableObject)) {
-                    const game = new GameSystem()
+    //             if(this.checkIntersection(currentCollidableObject, collidableObject)) {
+    //                 const game = new GameSystem()
 
-                    delete game.entities[this.currentCollidable.id]
-                    delete game.entities[collidable.id]
-                }
-            })
+    //                 delete game.entities[this.currentCollidable.id]
+    //                 delete game.entities[collidable.id]
+    //             }
+    //         })
 
-        }
-    }
+    //     }
+    // }
 
     checkWallCollision() {
         const game = GameWorld.getProps()

@@ -23,12 +23,13 @@ class Collision {
 class Movement {
     constructor() {
         this.name = "movement"
-        this.controls = {
-            up: false,
-            down: false,
-            left: false,
-            right: false,
-        }
+        this.currentDirection = "up"
+        // this.controls = {
+        //     up: true,
+        //     down: false,
+        //     left: false,
+        //     right: false,
+        // }
     }
 }
 

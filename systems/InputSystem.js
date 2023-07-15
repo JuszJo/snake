@@ -13,7 +13,7 @@ export default class InputSystem {
         addEventListener('keyup', e => {
             const key = e.key
             
-            this.systemManager.systems.movementSystem.handleKeyUpEvent(key, entities)
+            // this.systemManager.systems.movementSystem.handleKeyUpEvent(key, entities)
         })
     }
 }

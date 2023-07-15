@@ -8,53 +8,53 @@ export default class MovementSystem {
             const currentEntity = entities[i]
 
             if(key == "w") {
-                currentEntity.components.movement.controls.up = true
+                currentEntity.components.movement.currentDirection = "up"
             }
             if(key == "s") {
-                currentEntity.components.movement.controls.down = true
+                currentEntity.components.movement.currentDirection = "down"
             }
             if(key == "a") {
-                currentEntity.components.movement.controls.left = true
+                currentEntity.components.movement.currentDirection = "left"
             }
             if(key == "d") {
-                currentEntity.components.movement.controls.right = true
+                currentEntity.components.movement.currentDirection = "right"
             }
         }
     }
 
-    handleKeyUpEvent(key, entities) {
-        for(let i = 0; i < entities.length; ++i) {
-            const currentEntity = entities[i]
+    // handleKeyUpEvent(key, entities) {
+    //     for(let i = 0; i < entities.length; ++i) {
+    //         const currentEntity = entities[i]
 
-            if(key == "w") {
-                currentEntity.components.movement.controls.up = false
-            }
-            if(key == "s") {
-                currentEntity.components.movement.controls.down = false
-            }
-            if(key == "a") {
-                currentEntity.components.movement.controls.left = false
-            }
-            if(key == "d") {
-                currentEntity.components.movement.controls.right = false
-            }
-        }
-    }
+    //         if(key == "w") {
+    //             currentEntity.components.movement.controls.up = false
+    //         }
+    //         if(key == "s") {
+    //             currentEntity.components.movement.controls.down = false
+    //         }
+    //         if(key == "a") {
+    //             currentEntity.components.movement.controls.left = false
+    //         }
+    //         if(key == "d") {
+    //             currentEntity.components.movement.controls.right = false
+    //         }
+    //     }
+    // }
 
     move(entities) {
         for(let i = 0; i < entities.length; ++i) {
             const currentEntity = entities[i]
 
-            if(currentEntity.components.movement.controls.up) {
+            if(currentEntity.components.movement.currentDirection == "up") {
                 MovementSystem.subPositionY(currentEntity, 5)
             }
-            if(currentEntity.components.movement.controls.down) {
+            if(currentEntity.components.movement.currentDirection == "down") {
                 MovementSystem.addPositionY(currentEntity, 5)
             }
-            if(currentEntity.components.movement.controls.left) {
+            if(currentEntity.components.movement.currentDirection == "left") {
                 MovementSystem.subPositionX(currentEntity, 5)
             }
-            if(currentEntity.components.movement.controls.right) {
+            if(currentEntity.components.movement.currentDirection == "right") {
                 MovementSystem.addPositionX(currentEntity, 5)
             }
         }

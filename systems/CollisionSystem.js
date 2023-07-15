@@ -42,32 +42,40 @@ export default class CollisionSystem {
 
                 currentEntity.removeComponent("movement")
 
-                const game = new Game()
-                game.end()
+                if(currentEntity.name == "snake") {
+                    const game = new Game()
+                    game.end()
+                }
             }
             if(currentEntity.components.position.x + currentEntity.components.size.width > gameProps.canvas.width) {
                 MovementSystem.setPositionX(currentEntity, gameProps.canvas.width - currentEntity.components.size.width)
 
                 currentEntity.removeComponent("movement")
 
-                const game = new Game()
-                game.end()
+                if(currentEntity.name == "snake") {
+                    const game = new Game()
+                    game.end()
+                }
             }
             if(currentEntity.components.position.y < 0) {
                 MovementSystem.setPositionY(currentEntity, 0)
 
                 currentEntity.removeComponent("movement")
 
-                const game = new Game()
-                game.end()
+                if(currentEntity.name == "snake") {
+                    const game = new Game()
+                    game.end()
+                }
             }
             if(currentEntity.components.position.y + currentEntity.components.size.height > gameProps.canvas.height) {
                 MovementSystem.setPositionY(currentEntity, gameProps.canvas.height - currentEntity.components.size.height)
 
                 currentEntity.removeComponent("movement")
 
-                const game = new Game()
-                game.end()
+                if(currentEntity.name == "snake") {
+                    const game = new Game()
+                    game.end()
+                }
             }
         }
     }

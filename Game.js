@@ -1,5 +1,6 @@
 import EntityManager from "./Managers/EntityManager.js";
 import SystemManager from "./Managers/SystemManager.js";
+import Apple from "./classes/Apple.js";
 import Snake from "./classes/Snake.js";
 import InputSystem from "./systems/InputSystem.js";
 
@@ -18,6 +19,7 @@ export default class Game {
         this.inputSystem.listen()
 
         this.snake = new Snake().snake
+        this.apple = new Apple().apple
 
         instance = this
     }

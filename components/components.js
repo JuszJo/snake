@@ -24,6 +24,7 @@ class Movement {
     constructor() {
         this.name = "movement"
         this.currentDirection = "up"
+        // this.invalidDirection = "down"
         // this.controls = {
         //     up: true,
         //     down: false,

@@ -7,17 +7,21 @@ export default class MovementSystem {
         for(let i = 0; i < entities.length; ++i) {
             const currentEntity = entities[i]
 
-            if(key == "w") {
+            if(key == "w" && !(currentEntity.components.movement.currentDirection == "down")) {
                 currentEntity.components.movement.currentDirection = "up"
+                // currentEntity.components.movement.invalidDirection = "down"
             }
-            if(key == "s") {
+            if(key == "s" && !(currentEntity.components.movement.currentDirection == "up")) {
                 currentEntity.components.movement.currentDirection = "down"
+                // currentEntity.components.movement.invalidDirection = "up"
             }
-            if(key == "a") {
+            if(key == "a" && !(currentEntity.components.movement.currentDirection == "right")) {
                 currentEntity.components.movement.currentDirection = "left"
+                // currentEntity.components.movement.invalidDirection = "right"
             }
-            if(key == "d") {
+            if(key == "d" && !(currentEntity.components.movement.currentDirection == "left")) {
                 currentEntity.components.movement.currentDirection = "right"
+                // currentEntity.components.movement.invalidDirection = "left"
             }
         }
     }

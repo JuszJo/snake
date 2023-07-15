@@ -9,17 +9,11 @@ export default class Game {
         
         this.entityManager = new EntityManager()
         this.systemManager = new SystemManager()
-        this.inputSystem = new InputSystem(this.systemManager)
+        this.inputSystem = new InputSystem(this.systemManager, this.entityManager)
+
+        this.inputSystem.listen()
 
         this.snake = new Snake().snake
-
-        this.listenForKeyEvent()
-    }
-
-    listenForKeyEvent() {
-        const entities = this.entityManager.getEntitiesWithComponents("position", "size", "movement")
-
-        this.inputSystem.listen(entities)
     }
 
     static getProps() {
@@ -61,5 +55,10 @@ export default class Game {
         this.draw()
 
         requestAnimationFrame(this.start.bind(this))
+    }
+
+    end() {
+        console.log("lose");
+        this.running = fale
     }
 }

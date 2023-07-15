@@ -39,15 +39,27 @@ export default class CollisionSystem {
 
             if(currentEntity.components.position.x < 0) {
                 MovementSystem.setPositionX(currentEntity, 0)
+
+                // end game
+                currentEntity.removeComponent("movement")
             }
             if(currentEntity.components.position.x + currentEntity.components.size.width > game.canvas.width) {
                 MovementSystem.setPositionX(currentEntity, game.canvas.width - currentEntity.components.size.width)
+
+                // end game
+                currentEntity.removeComponent("movement")
             }
             if(currentEntity.components.position.y < 0) {
                 MovementSystem.setPositionY(currentEntity, 0)
+
+                // end game
+                currentEntity.removeComponent("movement")
             }
             if(currentEntity.components.position.y + currentEntity.components.size.height > game.canvas.height) {
                 MovementSystem.setPositionY(currentEntity, game.canvas.height - currentEntity.components.size.height)
+
+                // end game
+                currentEntity.removeComponent("movement")
             }
         }
     }

@@ -1,12 +1,9 @@
-import { GameWorld } from "../components/components.js"
-import GameSystem from "./GameSystem.js"
+import Game from "../Game.js";
 import MovementSystem from "./MovementSystem.js"
-import VelocitySystem from "./VelocitySystem.js"
 
 export default class CollisionSystem {
-    constructor(entities) {
-        this.entities = entities
-        this.collidables = []
+    constructor() {
+
     }
 
     // checkCollidables() {
@@ -30,8 +27,28 @@ export default class CollisionSystem {
             object1.name != object2.name
         )
         {
-
             return true;
+        }
+    }
+
+    checkWallCollision(entities) {
+        const game = Game.getProps()
+
+        for(let i = 0; i < entities.length; ++i) {
+            const currentEntity = entities[i]
+
+            if(currentEntity.components.position.x < 0) {
+                MovementSystem.setPositionX(currentEntity, 0)
+            }
+            if(currentEntity.components.position.x + currentEntity.components.size.width > game.canvas.width) {
+                MovementSystem.setPositionX(currentEntity, game.canvas.width - currentEntity.components.size.width)
+            }
+            if(currentEntity.components.position.y < 0) {
+                MovementSystem.setPositionY(currentEntity, 0)
+            }
+            if(currentEntity.components.position.y + currentEntity.components.size.height > game.canvas.height) {
+                MovementSystem.setPositionY(currentEntity, game.canvas.height - currentEntity.components.size.height)
+            }
         }
     }
 
@@ -71,56 +88,56 @@ export default class CollisionSystem {
     //     }
     // }
 
-    checkWallCollision() {
-        const game = GameWorld.getProps()
+    // checkWallCollision() {
+    //     const game = GameWorld.getProps()
 
-        for(const id in this.entities) {
-            const currentEntity = this.entities[id]
+    //     for(const id in this.entities) {
+    //         const currentEntity = this.entities[id]
 
-            if(currentEntity.components.collision) {
-                if((currentEntity.components.render.type == "quad" || currentEntity.components.render.type == "camera") && currentEntity.name != "bullet") {
-                    const entity = {
-                        x: currentEntity.components.position.x,
-                        y: currentEntity.components.position.y,
-                        width: currentEntity.components.dimension.width,
-                        height: currentEntity.components.dimension.height,
-                    }
+    //         if(currentEntity.components.collision) {
+    //             if((currentEntity.components.render.type == "quad" || currentEntity.components.render.type == "camera") && currentEntity.name != "bullet") {
+    //                 const entity = {
+    //                     x: currentEntity.components.position.x,
+    //                     y: currentEntity.components.position.y,
+    //                     width: currentEntity.components.dimension.width,
+    //                     height: currentEntity.components.dimension.height,
+    //                 }
 
-                    if(entity.x < 0) {
-                        MovementSystem.setPositionX(currentEntity, 0)
-                    }
-                    if(entity.x + entity.width > game.canvasWidth) {
-                        MovementSystem.setPositionX(currentEntity, game.canvasWidth - entity.width)
-                    }
-                    if(entity.y < 0) {
-                        MovementSystem.setPositionY(currentEntity, 0)
+    //                 if(entity.x < 0) {
+    //                     MovementSystem.setPositionX(currentEntity, 0)
+    //                 }
+    //                 if(entity.x + entity.width > game.canvasWidth) {
+    //                     MovementSystem.setPositionX(currentEntity, game.canvasWidth - entity.width)
+    //                 }
+    //                 if(entity.y < 0) {
+    //                     MovementSystem.setPositionY(currentEntity, 0)
 
-                        VelocitySystem.setVelocityY(currentEntity, 0)
-                    }
-                    if(entity.y + entity.height > game.canvasHeight) {
-                        MovementSystem.setPositionY(currentEntity, game.canvasHeight - entity.height)
+    //                     VelocitySystem.setVelocityY(currentEntity, 0)
+    //                 }
+    //                 if(entity.y + entity.height > game.canvasHeight) {
+    //                     MovementSystem.setPositionY(currentEntity, game.canvasHeight - entity.height)
 
-                        MovementSystem.changeState(currentEntity, "ground")
+    //                     MovementSystem.changeState(currentEntity, "ground")
                         
-                        if(!currentEntity.components.bounce) {
-                            VelocitySystem.setVelocityY(currentEntity, 0)
-                        }                        
-                    }
-                }
+    //                     if(!currentEntity.components.bounce) {
+    //                         VelocitySystem.setVelocityY(currentEntity, 0)
+    //                     }                        
+    //                 }
+    //             }
 
-                if(currentEntity.components.collision && currentEntity.name == "bullet") {
-                    const entity = {
-                        x: currentEntity.components.position.x,
-                        y: currentEntity.components.position.y,
-                        width: currentEntity.components.dimension.width,
-                        height: currentEntity.components.dimension.height,
-                    }
+    //             if(currentEntity.components.collision && currentEntity.name == "bullet") {
+    //                 const entity = {
+    //                     x: currentEntity.components.position.x,
+    //                     y: currentEntity.components.position.y,
+    //                     width: currentEntity.components.dimension.width,
+    //                     height: currentEntity.components.dimension.height,
+    //                 }
 
-                    if(entity.y < 0) {
-                        currentEntity.removeComponent("collision")
-                    }
-                }
-            }
-        }
-    }
+    //                 if(entity.y < 0) {
+    //                     currentEntity.removeComponent("collision")
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 }

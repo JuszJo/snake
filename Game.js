@@ -46,9 +46,13 @@ export default class Game {
     }
 
     update() {
-        const entities = this.entityManager.getEntitiesWithComponents("position", "size", "movement")
+        const movementEntities = this.entityManager.getEntitiesWithComponents("position", "size", "movement")
 
-        this.systemManager.systems.movementSystem.move(entities)
+        this.systemManager.systems.movementSystem.move(movementEntities)
+
+        const collisionEntities = this.entityManager.getEntitiesWithComponents("position", "size", "movement", "collision")
+
+        this.systemManager.systems.collisionSystem.checkWallCollision(collisionEntities)
     }
 
     start() {

@@ -41,10 +41,18 @@ class Tail {
     }
 }
 
+class Score {
+    constructor() {
+        this.name = "score"
+        this.value = 0
+    }
+}
+
 export default {
     Size,
     Position,
     Collision,
     Movement,
-    Tail
+    Tail,
+    Score
 }

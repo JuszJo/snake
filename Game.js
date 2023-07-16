@@ -2,6 +2,7 @@ import EntityManager from "./Managers/EntityManager.js";
 import EventManager from "./Managers/EventManager.js";
 import SystemManager from "./Managers/SystemManager.js";
 import Apple from "./classes/Apple.js";
+import Score from "./classes/Score.js";
 import Snake from "./classes/Snake.js";
 import InputSystem from "./systems/InputSystem.js";
 
@@ -21,7 +22,8 @@ export default class Game {
         
         this.inputSystem.listen()
 
-        this.snake = new Snake(),
+        this.score = new Score()
+        this.snake = new Snake()
         this.apple = new Apple()
 
         this.lose = false
@@ -54,7 +56,11 @@ export default class Game {
     draw() {
         const entities = this.entityManager.getEntitiesWithComponents("position", "size")
 
+        const scoreEntities = this.entityManager.getEntitiesWithComponents("score")
+        
         this.systemManager.systems.renderSystem.render(entities)
+
+        this.systemManager.systems.renderSystem.renderScore(scoreEntities)
     }
 
     update() {
@@ -106,7 +112,7 @@ export default class Game {
 
     restart() {
         this.entityManager.entities = {}
-        
+
         new Snake()
         new Apple()
 

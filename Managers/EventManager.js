@@ -1,5 +1,6 @@
 import Game from "../Game.js";
 import Apple from "../classes/Apple.js";
+import Score from "../classes/Score.js";
 import Snake from "../classes/Snake.js";
 
 export default class EventManager {
@@ -17,6 +18,7 @@ export default class EventManager {
             if(event == "snake ate apple") {
                 console.log(event);
 
+                new Score().increaseScore()
                 new Snake().increaseSize()
                 new Apple().reset()
 

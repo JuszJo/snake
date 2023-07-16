@@ -8,18 +8,6 @@ export default class CollisionSystem {
 
     }
 
-    // checkCollidables() {
-    //     this.collidables.splice(0)
-
-    //     for(const id in this.entities) {
-    //         const currentEntity = this.entities[id]
-
-    //         if(currentEntity.components.collision) {
-    //             this.collidables.push(currentEntity)
-    //         }
-    //     }
-    // }
-
     checkIntersection(object1, object2) {
         if(
             object1.components.position.x + object1.components.size.width > object2.components.position.x &&

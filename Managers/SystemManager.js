@@ -1,7 +1,6 @@
 import CollisionSystem from "../systems/CollisionSystem.js"
 import MovementSystem from "../systems/MovementSystem.js"
 import RenderSystem from "../systems/renderSystem.js"
-import EventManager from "./EventManager.js"
 
 export default class SystemManager {
     constructor(eventManager) {

@@ -27,17 +27,30 @@ export default class MovementSystem {
             const currentEntity = entities[i]
 
             if(currentEntity.components.movement.currentDirection == "up") {
-                MovementSystem.subPositionY(currentEntity, 5)
+                MovementSystem.subPositionY(currentEntity, 20)
+                // console.log(currentEntity);
             }
             if(currentEntity.components.movement.currentDirection == "down") {
-                MovementSystem.addPositionY(currentEntity, 5)
+                MovementSystem.addPositionY(currentEntity, 20)
             }
             if(currentEntity.components.movement.currentDirection == "left") {
-                MovementSystem.subPositionX(currentEntity, 5)
+                MovementSystem.subPositionX(currentEntity, 20)
             }
             if(currentEntity.components.movement.currentDirection == "right") {
-                MovementSystem.addPositionX(currentEntity, 5)
+                MovementSystem.addPositionX(currentEntity, 20)
             }
+        }
+    }
+
+    moveTail(entities) {
+        for(let i = 0; i < entities.length; ++i) {
+            const currentEntity = entities[i]
+
+            const prevTailEntity = currentEntity.components.tail.prevTail
+
+            // console.log(prevTailEntity);
+
+            // console.log(currentEntity.components.tail.prev.components.position)
         }
     }
 

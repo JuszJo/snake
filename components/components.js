@@ -34,9 +34,17 @@ class Movement {
     }
 }
 
+class Tail {
+    constructor(prevTail) {
+        this.name = "tail"
+        this.prevTail = prevTail
+    }
+}
+
 export default {
     Size,
     Position,
     Collision,
-    Movement
+    Movement,
+    Tail
 }

@@ -26,6 +26,11 @@ export default class Game {
 
         this.lose = false
 
+        this.lastime = null
+
+        this.buffer = 15
+        this.framesPassed = 0
+
         instance = this
     }
 
@@ -55,7 +60,11 @@ export default class Game {
     update() {
         const movementEntities = this.entityManager.getEntitiesWithComponents("position", "size", "movement")
 
+        const tailEntities = this.entityManager.getEntitiesWithComponents("position", "size", "tail")
+
         this.systemManager.systems.movementSystem.move(movementEntities)
+
+        this.systemManager.systems.movementSystem.moveTail(tailEntities)
 
         const collisionEntities = this.entityManager.getEntitiesWithComponents("position", "size", "collision")
 
@@ -66,10 +75,27 @@ export default class Game {
         this.eventManager.listen()
     }
 
-    start() {
-        this.update()
+    startLoop() {
+        requestAnimationFrame(this.start.bind(this))
+    }
 
-        this.draw()
+    start(delta) {
+        if(!this.lastime) this.lastime = delta
+        
+        const fps = delta - this.lastime
+
+        this.lastime = delta
+
+        // console.log(1 / fps * 1000);
+        if(this.framesPassed % this.buffer == 0) {
+            this.update()
+    
+            this.draw()
+
+            this.framesPassed = 0
+        }
+
+        this.framesPassed++
 
         requestAnimationFrame(this.start.bind(this))
     }

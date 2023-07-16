@@ -113,6 +113,7 @@ export default class Game {
     restart() {
         this.entityManager.entities = {}
 
+        new Score()
         new Snake()
         new Apple()
 

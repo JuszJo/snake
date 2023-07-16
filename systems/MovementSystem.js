@@ -26,9 +26,13 @@ export default class MovementSystem {
         for(let i = 0; i < entities.length; ++i) {
             const currentEntity = entities[i]
 
+            currentEntity.prevPosition = {
+                x: currentEntity.components.position.x,
+                y: currentEntity.components.position.y
+            }
+
             if(currentEntity.components.movement.currentDirection == "up") {
                 MovementSystem.subPositionY(currentEntity, 20)
-                // console.log(currentEntity);
             }
             if(currentEntity.components.movement.currentDirection == "down") {
                 MovementSystem.addPositionY(currentEntity, 20)
@@ -46,11 +50,13 @@ export default class MovementSystem {
         for(let i = 0; i < entities.length; ++i) {
             const currentEntity = entities[i]
 
-            const prevTailEntity = currentEntity.components.tail.prevTail
+            currentEntity.prevPosition = {
+                x: currentEntity.components.position.x,
+                y: currentEntity.components.position.y,
+            }
 
-            // console.log(prevTailEntity);
-
-            // console.log(currentEntity.components.tail.prev.components.position)
+            currentEntity.components.position.x = currentEntity.head.prevPosition.x
+            currentEntity.components.position.y = currentEntity.head.prevPosition.y
         }
     }
 

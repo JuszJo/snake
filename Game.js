@@ -101,7 +101,10 @@ export default class Game {
     }
 
     restart() {
+        this.entityManager.entities = {}
+
         new Snake()
+        new Apple()
 
         this.lose = false
     }

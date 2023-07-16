@@ -14,7 +14,7 @@ export default class EntityManager {
     createEntity(name) {
         const entity = new Entity(name)
 
-        this.entities[entity.name] = entity
+        this.entities[entity.id] = entity
 
         return entity
     }
@@ -22,8 +22,8 @@ export default class EntityManager {
     getEntitiesWithComponents(...components) {
         const arrayOfEntities = []
 
-        for(const name in this.entities) {
-            const currentEntity = this.entities[name]
+        for(const id in this.entities) {
+            const currentEntity = this.entities[id]
 
             const keys = Object.keys(currentEntity.components)
 

@@ -24,7 +24,31 @@ export default class CollisionSystem {
 
         if(this.checkIntersection(currentEntity[0], entities[1])) {
             this.eventManager.dispatchEvent("snake ate apple")
-        }   
+        }
+    }
+
+    checkSelfCollision(entities) {
+        let snake = null
+        const collidables = []
+
+        for(let i = 0; i < entities.length; ++i) {
+            const currentEntity = entities[i]
+
+            if(currentEntity.name == "snake") {
+                snake = currentEntity
+            }
+            else if(currentEntity.name != "apple") {
+                collidables.push(currentEntity)
+            }
+        }
+        
+        for(let i = 0; i < collidables.length; ++i) {
+            const currentEntity = collidables[i]
+
+            if(this.checkIntersection(snake, currentEntity)) {
+                this.eventManager.dispatchEvent("player lost")
+            }
+        }
     }
 
     checkWallCollision(entities) {

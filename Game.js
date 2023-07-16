@@ -70,6 +70,8 @@ export default class Game {
 
         this.systemManager.systems.collisionSystem.checkAppleCollision(collisionEntities)
 
+        this.systemManager.systems.collisionSystem.checkSelfCollision(collisionEntities)
+
         this.systemManager.systems.collisionSystem.checkWallCollision(collisionEntities)
 
         this.eventManager.listen()
@@ -88,7 +90,9 @@ export default class Game {
 
         // console.log(1 / fps * 1000);
         if(this.framesPassed % this.buffer == 0) {
-            this.update()
+            if(!this.lose) {
+                this.update()
+            }
     
             this.draw()
 
@@ -102,7 +106,7 @@ export default class Game {
 
     restart() {
         this.entityManager.entities = {}
-
+        
         new Snake()
         new Apple()
 

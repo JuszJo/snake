@@ -11,7 +11,8 @@ class Tail {
         this.tail.head = head
 
         this.tail.addComponent(new components.Size(width, height))
-        this.tail.addComponent(new components.Position(this.tail.head.prevPosition.x, this.tail.head.prevPosition.y))  
+        this.tail.addComponent(new components.Position(this.tail.head.prevPosition.x, this.tail.head.prevPosition.y))
+        this.tail.addComponent(new components.Collision())
         this.tail.addComponent(new components.Tail())
     }
 }

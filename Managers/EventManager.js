@@ -25,11 +25,6 @@ export default class EventManager {
             if(event == "player lost") {
                 console.log(event)
 
-                new Snake().snakeTail.forEach(entity => {
-                    entity.removeComponent("movement")
-                    entity.removeComponent("tail")
-                })
-
                 new Game().end()
                 
                 this.events.splice(index, 1)

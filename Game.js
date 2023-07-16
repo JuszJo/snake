@@ -1,4 +1,5 @@
 import EntityManager from "./Managers/EntityManager.js";
+import EventManager from "./Managers/EventManager.js";
 import SystemManager from "./Managers/SystemManager.js";
 import Apple from "./classes/Apple.js";
 import Snake from "./classes/Snake.js";
@@ -11,15 +12,17 @@ export default class Game {
         if(instance) return instance
 
         this.game = Game.getProps()
-        
-        this.entityManager = new EntityManager()
-        this.systemManager = new SystemManager()
-        this.inputSystem = new InputSystem(this.systemManager, this.entityManager)
 
+        this.eventManager = new EventManager()
+        this.entityManager = new EntityManager()
+        this.systemManager = new SystemManager(this.eventManager)
+
+        this.inputSystem = new InputSystem(this.systemManager, this.entityManager)
+        
         this.inputSystem.listen()
 
-        this.snake = new Snake().snake
-        this.apple = new Apple().apple
+        this.snake = new Snake(),
+        this.apple = new Apple()
 
         this.lose = false
 
@@ -59,6 +62,8 @@ export default class Game {
         this.systemManager.systems.collisionSystem.checkAppleCollision(collisionEntities)
 
         this.systemManager.systems.collisionSystem.checkWallCollision(collisionEntities)
+
+        this.eventManager.listen()
     }
 
     start() {
@@ -70,14 +75,12 @@ export default class Game {
     }
 
     restart() {
-        this.snake = new Snake().snake
+        new Snake()
 
         this.lose = false
     }
 
     end() {
-        console.log("lose");
-        
         this.lose = true
 
         setTimeout(() => {

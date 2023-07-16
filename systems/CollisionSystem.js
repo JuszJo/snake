@@ -1,11 +1,9 @@
 import Game from "../Game.js";
-import Apple from "../classes/Apple.js";
-import Snake from "../classes/Snake.js";
 import MovementSystem from "./MovementSystem.js"
 
 export default class CollisionSystem {
-    constructor() {
-
+    constructor(eventManager) {
+        this.eventManager = eventManager
     }
 
     checkIntersection(object1, object2) {
@@ -25,10 +23,7 @@ export default class CollisionSystem {
         const currentEntity = entities.slice(0, 1)
 
         if(this.checkIntersection(currentEntity[0], entities[1])) {
-            console.log("eaten apple");
-            
-            new Apple().reset()
-            new Snake().increaseSize()
+            this.eventManager.dispatchEvent("snake ate apple")
         }   
     }
 
@@ -44,8 +39,7 @@ export default class CollisionSystem {
                 currentEntity.removeComponent("movement")
 
                 if(currentEntity.name == "snake") {
-                    const game = new Game()
-                    game.end()
+                    this.eventManager.dispatchEvent("player lost")
                 }
             }
             if(currentEntity.components.position.x + currentEntity.components.size.width > gameProps.canvas.width) {
@@ -54,8 +48,7 @@ export default class CollisionSystem {
                 currentEntity.removeComponent("movement")
 
                 if(currentEntity.name == "snake") {
-                    const game = new Game()
-                    game.end()
+                    this.eventManager.dispatchEvent("player lost")
                 }
             }
             if(currentEntity.components.position.y < 0) {
@@ -64,8 +57,7 @@ export default class CollisionSystem {
                 currentEntity.removeComponent("movement")
 
                 if(currentEntity.name == "snake") {
-                    const game = new Game()
-                    game.end()
+                    this.eventManager.dispatchEvent("player lost")
                 }
             }
             if(currentEntity.components.position.y + currentEntity.components.size.height > gameProps.canvas.height) {
@@ -74,8 +66,7 @@ export default class CollisionSystem {
                 currentEntity.removeComponent("movement")
 
                 if(currentEntity.name == "snake") {
-                    const game = new Game()
-                    game.end()
+                    this.eventManager.dispatchEvent("player lost")
                 }
             }
         }

@@ -10,8 +10,8 @@ export default class Apple {
 
         this.apple = new EntityManager().createEntity("apple")
 
-        this.apple.addComponent(new components.Size(10, 10))
-        this.apple.addComponent(new components.Position(300, 50))
+        this.apple.addComponent(new components.Size(20, 20))
+        this.apple.addComponent(new components.Position(300, 40))
         this.apple.addComponent(new components.Collision())
 
         instance = this
@@ -19,13 +19,25 @@ export default class Apple {
 
     randomPosition() {
         return {
-            x: Math.min(Math.max(Math.floor(Math.random() * 750), 0), 750),
-            y: Math.min(Math.max(Math.floor(Math.random() * 550), 0), 550)
+            x: Math.min(Math.max(Math.floor(Math.random() * 781), 0), 780),
+            y: Math.min(Math.max(Math.floor(Math.random() * 581), 0), 580)
+        }
+    }
+
+    alignToGrid(randomPosition) {
+        if(randomPosition.x % 20 != 0) {
+            randomPosition.x = randomPosition.x - (randomPosition.x % 20)
+        }
+
+        if(randomPosition.y % 20 != 0) {
+            randomPosition.y = randomPosition.y - (randomPosition.y % 20)
         }
     }
 
     reset() {
         const randomPosition = this.randomPosition()
+
+        this.alignToGrid(randomPosition)
 
         this.apple.components.position.x = randomPosition.x
         this.apple.components.position.y = randomPosition.y

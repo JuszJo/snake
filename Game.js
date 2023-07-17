@@ -76,6 +76,8 @@ export default class Game {
 
         this.systemManager.systems.collisionSystem.checkAppleCollision(collisionEntities)
 
+        this.systemManager.systems.collisionSystem.checkTailCollision(collisionEntities)
+
         this.systemManager.systems.collisionSystem.checkSelfCollision(collisionEntities)
 
         this.systemManager.systems.collisionSystem.checkWallCollision(collisionEntities)

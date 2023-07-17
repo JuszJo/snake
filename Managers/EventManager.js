@@ -24,6 +24,14 @@ export default class EventManager {
 
                 this.events.splice(index, 1)
             }
+            if(event == "wrong apple position") {
+                console.log(event)
+
+                new Apple().resetTillSpaceFound(this.entities)
+
+                this.entities.splice(0)
+                this.events.splice(index, 1)
+            }
             if(event == "player lost") {
                 console.log(event)
 

@@ -27,6 +27,31 @@ export default class CollisionSystem {
         }
     }
 
+    checkTailCollision(entities) {
+        let apple = null
+        const collidables = []
+
+        for(let i = 0; i < entities.length; ++i) {
+            const currentEntity = entities[i]
+
+            if(currentEntity.name == "apple") {
+                apple = currentEntity
+            }
+            else if(currentEntity.name != "apple" && currentEntity.name != "snake") {
+                collidables.push(currentEntity)
+            }
+        }
+
+        for(let i = 0; i < collidables.length; ++i) {
+            const currentEntity = collidables[i]
+
+            if(this.checkIntersection(apple, currentEntity)) {
+                this.eventManager.addEntities(...collidables)
+                this.eventManager.dispatchEvent("wrong apple position")
+            }
+        }
+    }
+
     checkSelfCollision(entities) {
         let snake = null
         const collidables = []

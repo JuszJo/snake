@@ -43,4 +43,22 @@ export default class Apple {
         this.apple.components.position.x = randomPosition.x
         this.apple.components.position.y = randomPosition.y
     }
+
+    resetTillSpaceFound(tails) {
+        const randomPosition = this.randomPosition()
+
+        this.alignToGrid(randomPosition)
+
+        tails.forEach(tail => {
+            if(tail.components.position.x == randomPosition.x && tail.components.position.y == randomPosition.y) {
+                this.resetTillSpaceFound(tails)
+            }
+            else {
+                return
+            }
+        });
+
+        this.apple.components.position.x = randomPosition.x
+        this.apple.components.position.y = randomPosition.y
+    }
 }

@@ -20,8 +20,8 @@ export default class Apple {
 
     randomPosition() {
         return {
-            x: Math.min(Math.max(Math.floor(Math.random() * 781), 0), 780),
-            y: Math.min(Math.max(Math.floor(Math.random() * 581), 0), 580)
+            x: Math.min(Math.max(Math.floor(Math.random() * 781), 0), 800),
+            y: Math.min(Math.max(Math.floor(Math.random() * 581), 0), 600)
         }
     }
 
@@ -48,7 +48,7 @@ export default class Apple {
         const randomPosition = this.randomPosition()
 
         this.alignToGrid(randomPosition)
-
+        
         tails.forEach(tail => {
             if(tail.components.position.x == randomPosition.x && tail.components.position.y == randomPosition.y) {
                 this.resetTillSpaceFound(tails)
@@ -60,5 +60,6 @@ export default class Apple {
 
         this.apple.components.position.x = randomPosition.x
         this.apple.components.position.y = randomPosition.y
+
     }
 }

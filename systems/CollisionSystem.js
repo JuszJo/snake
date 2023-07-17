@@ -19,42 +19,11 @@ export default class CollisionSystem {
         }
     }
 
-    checkAppleCollision(entities) {
-        const currentEntity = entities.slice(0, 1)
-
-        if(this.checkIntersection(currentEntity[0], entities[1])) {
-            this.eventManager.dispatchEvent("snake ate apple")
-        }
-    }
-
-    checkTailCollision(entities) {
-        let apple = null
-        const collidables = []
-
-        for(let i = 0; i < entities.length; ++i) {
-            const currentEntity = entities[i]
-
-            if(currentEntity.name == "apple") {
-                apple = currentEntity
-            }
-            else if(currentEntity.name != "apple" && currentEntity.name != "snake") {
-                collidables.push(currentEntity)
-            }
-        }
-
-        for(let i = 0; i < collidables.length; ++i) {
-            const currentEntity = collidables[i]
-
-            if(this.checkIntersection(apple, currentEntity)) {
-                this.eventManager.addEntities(...collidables)
-                this.eventManager.dispatchEvent("wrong apple position")
-            }
-        }
-    }
-
     checkSelfCollision(entities) {
         let snake = null
-        const collidables = []
+        let apple = null
+        const collidablesSnake = []
+        const collidablesApple = []
 
         for(let i = 0; i < entities.length; ++i) {
             const currentEntity = entities[i]
@@ -62,16 +31,47 @@ export default class CollisionSystem {
             if(currentEntity.name == "snake") {
                 snake = currentEntity
             }
-            else if(currentEntity.name != "apple") {
-                collidables.push(currentEntity)
+            else {
+                collidablesSnake.push(currentEntity)
+
+                if(currentEntity.name == "apple") {
+                    apple = currentEntity
+                }
+                else {
+                    collidablesApple.push(currentEntity)
+                }
             }
         }
         
-        for(let i = 0; i < collidables.length; ++i) {
-            const currentEntity = collidables[i]
+        for(let i = 0; i < collidablesSnake.length; ++i) {
+            const currentEntity = collidablesSnake[i]
 
             if(this.checkIntersection(snake, currentEntity)) {
-                this.eventManager.dispatchEvent("player lost")
+                switch (currentEntity.name) {
+                    case "apple":
+                        this.eventManager.dispatchEvent("snake ate apple")
+                        break;
+
+                    case "tail":
+                        this.eventManager.dispatchEvent("player lost")
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        }
+        for(let i = 0; i < collidablesApple.length; ++i) {
+            const currentEntityForApple = collidablesApple[i]
+            if(this.checkIntersection(apple, currentEntityForApple)) {
+                switch (currentEntityForApple.name) {
+                    case "tail":
+                        this.eventManager.dispatchEvent("wrong apple position")
+                        break;
+
+                    default:
+                        break;
+                }
             }
         }
     }

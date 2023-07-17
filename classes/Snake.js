@@ -24,7 +24,8 @@ export default class Snake {
         this.snake = new EntityManager().createEntity("snake")
         
         this.snake.addComponent(new components.Size(20, 20))
-        this.snake.addComponent(new components.Position(300, 500))
+        this.snake.addComponent(new components.Position(380, 500))
+        this.snake.addComponent(new components.Color("seagreen"))
         this.snake.addComponent(new components.Movement())
         this.snake.addComponent(new components.Collision())
 

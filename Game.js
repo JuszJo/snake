@@ -74,10 +74,6 @@ export default class Game {
 
         const collisionEntities = this.entityManager.getEntitiesWithComponents("position", "size", "collision")
 
-        this.systemManager.systems.collisionSystem.checkAppleCollision(collisionEntities)
-
-        this.systemManager.systems.collisionSystem.checkTailCollision(collisionEntities)
-
         this.systemManager.systems.collisionSystem.checkSelfCollision(collisionEntities)
 
         this.systemManager.systems.collisionSystem.checkWallCollision(collisionEntities)
@@ -101,7 +97,7 @@ export default class Game {
             if(!this.lose) {
                 this.update()
             }
-    
+            
             this.draw()
 
             this.framesPassed = 0

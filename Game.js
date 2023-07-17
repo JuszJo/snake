@@ -30,7 +30,7 @@ export default class Game {
 
         this.lastime = null
 
-        this.buffer = 15
+        this.buffer = 10
         this.framesPassed = 0
 
         instance = this

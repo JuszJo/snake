@@ -10,6 +10,8 @@ export default class RenderSystem {
         for(let i = 0; i < entities.length; ++i) {
             const currentEntity = entities[i]
 
+            this.gameProps.drawingSurface.fillStyle = currentEntity.components.color ? currentEntity.components.color.value : "black"
+
             this.gameProps.drawingSurface.fillRect(
                 currentEntity.components.position.x, currentEntity.components.position.y,
                 currentEntity.components.size.width, currentEntity.components.size.height

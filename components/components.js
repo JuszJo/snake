@@ -48,11 +48,19 @@ class Score {
     }
 }
 
+class Color {
+    constructor(value) {
+        this.name = "color"
+        this.value = value
+    }
+}
+
 export default {
     Size,
     Position,
     Collision,
     Movement,
     Tail,
-    Score
+    Score,
+    Color
 }

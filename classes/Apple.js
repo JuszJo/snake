@@ -12,6 +12,7 @@ export default class Apple {
 
         this.apple.addComponent(new components.Size(20, 20))
         this.apple.addComponent(new components.Position(300, 40))
+        this.apple.addComponent(new components.Color("red"))
         this.apple.addComponent(new components.Collision())
 
         instance = this

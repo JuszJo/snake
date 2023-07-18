@@ -21,9 +21,7 @@ export default class CollisionSystem {
 
     checkSelfCollision(entities) {
         let snake = null
-        let apple = null
         const collidablesSnake = []
-        const collidablesApple = []
 
         for(let i = 0; i < entities.length; ++i) {
             const currentEntity = entities[i]
@@ -33,13 +31,6 @@ export default class CollisionSystem {
             }
             else {
                 collidablesSnake.push(currentEntity)
-
-                if(currentEntity.name == "apple") {
-                    apple = currentEntity
-                }
-                else {
-                    collidablesApple.push(currentEntity)
-                }
             }
         }
         
@@ -60,20 +51,7 @@ export default class CollisionSystem {
                         break;
                 }
             }
-        }
-        for(let i = 0; i < collidablesApple.length; ++i) {
-            const currentEntityForApple = collidablesApple[i]
-            if(this.checkIntersection(apple, currentEntityForApple)) {
-                switch (currentEntityForApple.name) {
-                    case "tail":
-                        this.eventManager.dispatchEvent("wrong apple position")
-                        break;
-
-                    default:
-                        break;
-                }
-            }
-        }
+        }        
     }
 
     checkWallCollision(entities) {

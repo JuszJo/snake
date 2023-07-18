@@ -28,16 +28,6 @@ export default class EventManager {
 
                 this.events.splice(index, 1)
             }
-            if(event == "wrong apple position") {
-                console.log(event)
-
-                const entities = new EntityManager().getEntitiesWithComponents("size", "position", "collision")
-
-                new Apple().resetTillSpaceFound(entities)
-
-                this.entities.splice(0)
-                this.events.splice(index, 1)
-            }
             if(event == "player lost") {
                 console.log(event)
 

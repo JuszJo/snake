@@ -1,13 +1,10 @@
 import Game from "../Game.js";
-import Apple from "../classes/Apple.js";
-import Score from "../classes/Score.js";
-import Snake from "../classes/Snake.js";
-import EntityManager from "./EntityManager.js";
 
 export default class EventManager {
-    constructor() {
+    constructor(entityManager) {
         this.events = []
         this.entities = []
+        this.entityManager = entityManager
     }
 
     addEntities(...entities) {
@@ -19,12 +16,25 @@ export default class EventManager {
             if(event == "snake ate apple") {
                 console.log(event);
 
-                const entities = new EntityManager().getEntitiesWithComponents("size", "position", "collision")
+                const score = this.entityManager.getEntitiesWithComponents("score")
 
-                new Score().increaseScore()
-                new Snake().increaseSize()
-                new Apple().resetTillSpaceFound(entities)
+                score[0].instance.increaseScore()
 
+                const entities = this.entityManager.getEntitiesWithComponents("size", "position", "collision")
+
+                for(const id in entities) {
+                    const currentEntity = entities[id]
+
+                    if(currentEntity.name == "score") {
+                        currentEntity.instance.increaseScore()
+                    }
+                    if(currentEntity.name == "snake") {
+                        currentEntity.instance.increaseSize()
+                    }
+                    if(currentEntity.name == "apple") {
+                        currentEntity.instance.resetTillSpaceFound(entities)
+                    }
+                }
 
                 this.events.splice(index, 1)
             }

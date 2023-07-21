@@ -1,8 +1,5 @@
-import Game from "../Game.js";
 import EntityManager from "../Managers/EntityManager.js";
 import components from "../components/components.js";
-
-let instance = null
 
 class Tail {
     constructor(width, height, head) {
@@ -19,8 +16,6 @@ class Tail {
 
 export default class Snake {
     constructor() {
-        if(instance && new Game().lose == false) return instance
-
         this.snake = new EntityManager().createEntity("snake")
         
         this.snake.addComponent(new components.Size(20, 20))
@@ -31,7 +26,7 @@ export default class Snake {
 
         this.snakeTail = [this.snake]
 
-        instance = this
+        this.snake.instance = this
     }
 
     increaseSize() {

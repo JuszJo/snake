@@ -14,8 +14,8 @@ export default class Game {
 
         this.game = Game.getProps()
 
-        this.eventManager = new EventManager()
         this.entityManager = new EntityManager()
+        this.eventManager = new EventManager(this.entityManager)
         this.systemManager = new SystemManager(this.eventManager)
 
         this.inputSystem = new InputSystem(this.systemManager, this.entityManager)
@@ -111,9 +111,9 @@ export default class Game {
     restart() {
         this.entityManager.entities = {}
 
-        new Score()
-        new Snake()
-        new Apple()
+        this.score = new Score()
+        this.snake = new Snake()
+        this.apple = new Apple()
 
         this.lose = false
     }

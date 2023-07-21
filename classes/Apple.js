@@ -1,21 +1,16 @@
-import Game from "../Game.js";
 import EntityManager from "../Managers/EntityManager.js";
 import components from "../components/components.js";
 
-let instance = null
-
 export default class Apple {
     constructor() {
-        if(instance && new Game().lose == false) return instance
-
         this.apple = new EntityManager().createEntity("apple")
 
         this.apple.addComponent(new components.Size(20, 20))
-        this.apple.addComponent(new components.Position(300, 40))
+        this.apple.addComponent(new components.Position(380, 40))
         this.apple.addComponent(new components.Color("red"))
         this.apple.addComponent(new components.Collision())
 
-        instance = this
+        this.apple.instance = this
     }
 
     randomPosition() {
